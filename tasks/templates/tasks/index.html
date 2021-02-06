@@ -1,19 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Todo App</title>
-</head>
-<body>
-    <h1>Tasks</h1>
+{%  extends 'tasks/base.html' %}
+{%  block content %}
+    <div class="row">
+    <div class="col-sm-8">
+    <div class="card">
+      <div class="card-body">
+        {% for task in tasks %}
+            <div>
+                {%  if task.completed == 1 %}
+                    <del>{{ task }}</del>
+                    <a href="/undo/{{task.id}}">Undo</a>
+                {%  else %}
+                    {{ task }}
+                    <a href="/complete/{{task.id}}">Complete</a>
+                {% endif %}
+                <a href="">Delete</a>
+            </div>
+        {%  endfor %}
+      </div>
+    </div>
+    </div>
+    </div>
+{%  endblock %}
 
-    {% for task in tasks %}
-        <div>
-            {{ task }}
-            <a href="">Complete</a>
-            <a href="">Delete</a>
-        </div>
-    {%  endfor %}
-
-</body>
-</html>
